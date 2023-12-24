@@ -1,0 +1,15 @@
+# reports and presentations are kept out of the repo
+docs/
+*.docx
+*.pdf
+*.pptx
+
+# database dumps / backups
+*.backup
+*.dump
+
+# editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

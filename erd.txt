@@ -1,0 +1,128 @@
+@startuml
+
+skinparam linetype ortho
+
+entity "Person" as Person {
+  *PersonID <<PK>>
+  --
+  *FirstName
+  *LastName
+  *Gender
+  *RegistrationDate
+  *Rating
+  *CredentialsID <<FK>>
+  *IsDriver
+  LicenceNumber
+  PhotoURL
+}
+
+entity "Credentials" as Credentials {
+  *CredentialsID <<PK>>
+  --
+  *Login
+  *Password 
+}
+
+entity "Car" as Car {
+  *CarID <<PK>>
+  --
+  *RegistrationNumber
+  *DateOfRegistration
+  *Model
+  *Type
+  *Class
+  *IdentificationNumber
+  *FuelType 
+  *Color
+  *NumberOfSeats
+}
+
+entity "Driver_Car" as Driver_Car{
+  *Driver_CarID <<PK>>
+  --
+  *PersonID <<FK>>
+  *CarID <<FK>>
+}
+
+entity "Address" as Address {
+  *AddressID <<PK>>
+  --
+  *City 
+  *Street 
+  *Building
+  Note
+}
+
+entity "Trip" as Trip {
+  *TripID <<PK>>
+  --
+  *Driver_CarID <<FK>>
+  *PersonID <<FK>>
+  *StartTime 
+  *EndTime
+  *DepartureAddressID <<FK>> 
+  *DestinationAddressID <<FK>>
+  *PaymentID <<FK>>
+  *Distance 
+  *Status 
+}
+
+entity "Review" as Review {
+  *ReviewID <<PK>>
+  --
+  *TripID <<FK>>
+  *Sender
+  *Rating 
+  Note
+}
+
+entity "CreditCard" as CreditCard {
+  *CreditCardID <<PK>>
+  --
+  *Number 
+  *ExpirationDate
+  *CVV
+  *PersonID <<FK>>  
+}
+
+entity "Message" as Message {
+  *MessageID <<PK>>
+  --
+  *TripID <<FK>>
+  *Sender
+  *DispatchTime
+  *Status 
+  *TextContent 
+}
+
+entity "Payment" as Payment {
+  *PaymentID <<PK>>
+  --
+  *CreditCardID <<FK>>
+  *Price 
+  *PaymentTime 
+  *Status 
+}
+
+entity "SavedAddress" as SavedAddress {
+  *SavedAddressID <<PK>>
+  --
+  *PersonID <<FK>>
+  *AddressID <<FK>> 
+}
+
+Person ||..|| Credentials
+Person ||..o{ Driver_Car
+Driver_Car ||..o{ Trip
+Car ||..o{ Driver_Car
+Person ||..o{ Trip
+Trip ||..o{ Review
+Person ||..|{ CreditCard
+CreditCard ||..o{ Payment
+Payment ||..|| Trip
+Address ||..o{ Trip
+Trip ||..o{ Message
+Address ||..o{ SavedAddress
+Person ||..o{ SavedAddress
+
+@enduml

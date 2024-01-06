@@ -1,0 +1,57 @@
+Person 20000 (1000 drivers + 19000 customers) 5% + 95%
+DateOfRegistration between 01.01.2000 and 31.12.2020
+Rating is INT between 0 and 100
+50% NULL in PhotoURL
+
+Credentials 20000
+
+Car 2000 (generated in mockaroo)
+DateOfRegistration between 01.01.1980 - 31.12.1999
+RegNumber is VIN
+IdentNumber 8 digits
+approx. 50%/50% gasoline/diesel
+
+Driver_Car 10000
+
+Address 100000
+Building 1-999
+
+SavedAddress 100000
+
+CreditCard 50000
+Exp.date between 01.01.2023 - 31.12.2028
+
+Payment 100000
+Prices 1 - 9999 decimal(6,2)
+PaymentDates between 01.01.2021 - 31.12.2021
+Status C completed
+
+Trip 100000
+Dates between 01.01.2021 - 31.12.2021
+Distance float 1-1000
+Status C completed
+
+Review 100000
+
+Message 100000
+TextContent length 20
+
+
+distance = time * 30 km/h
+price= 50 * (1+rand*0.2) + 0.01*distance (50 hr + 10 hr/km)
+
+Review
+user -> driver 0
+driver -> user 1
+
+Constraints:
+1) Person: gender_check, rating_check, driver_licence_check, 
+          unique_licence_number, unique_credentials_id
+2) Credentials: unique_login
+3) Car: unique_registration_number, unique_identification_number, fuel_type_check
+4) CreditCard: unique_card_number
+5) Driver_Car: unique_driver_car
+6) Review: review_rating_check
+7) Trip: departure_destination_check, unique_payment_id, 
+         departure_destination_time_check
+         
